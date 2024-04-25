@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const NewsSchema = new mongoose.Schema({
+    sport: {
+        type: String,
+        required: true,
+    },
     title: {
         type: String,
         required: true,
@@ -11,10 +15,6 @@ const NewsSchema = new mongoose.Schema({
     },
     image: {
         type: String, 
-        required: true,
-    },
-    sport: {
-        type: String,
         required: true,
     },
 });

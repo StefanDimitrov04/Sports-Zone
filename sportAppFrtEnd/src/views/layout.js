@@ -1,4 +1,5 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { getNewsForSport } from "../data/news.js";
 
 export const layoutTemplate = (userData, content) => html `
 <header>
@@ -9,10 +10,10 @@ export const layoutTemplate = (userData, content) => html `
         <li class="dropdown">
           <a href="#">Sports</a>
           <div class="dropdown-content">
-            <a href="#">Basketball</a>
-            <a href="#">Football</a>
-            <a href="#">Tennis</a>
-            <a href="#">Volleyball</a>
+            <a href="/home/Basketball">Basketball</a>
+            <a href="/home/Football">Football</a>
+            <a href="/home/Tennis">Tennis</a>
+            <a href="/home/Volleyball">Volleyball</a>
           </div>
         </li>  
         ${!userData ? html`
@@ -31,3 +32,7 @@ export const layoutTemplate = (userData, content) => html `
   </header>
    <main> ${content} </main>
 `;
+
+
+
+

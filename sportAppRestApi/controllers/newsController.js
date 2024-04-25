@@ -1,10 +1,12 @@
 const router = require('express').Router();
 const newsManager = require('../managers/newsManager');
+const News = require('../models/News');
 
 router.get('/home', async (req, res) => {
     try {
         const articles = await newsManager.getAll();
         res.json(articles);
+        console.log(req.body);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -17,13 +19,23 @@ router.get('/:newsId', async (req, res) => {
     } catch (error) {
         res.status(500).json({message: error.message});
     }
+});
+
+router.get('/home/:sport', async (req, res) => {
+    
+    const sport = (req.params.sport);
+    try {
+        const result =  await News.find({sport});
+        res.json(result);
+    } catch (error) {
+    res.status(500).json({message: error.message});
+    }
 })
 
 router.post('/create', async (req,res) => {
     try {
         const newsData = await newsManager.create(req.body);
-        
-        res.status(201).json({messsage: "Article created succesfully"});
+        res.status(201).json({messsage: "Article created succesfully"}, newsData);
     } catch (error) {
         res.status(400).json({message: error.message});
     }  
