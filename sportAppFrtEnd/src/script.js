@@ -8,6 +8,7 @@ import { registerPage } from "./views/register.js";
 import { createPage } from "./views/create.js";
 import { getNewsForSport } from "./data/news.js";
 import { sportPage } from "./views/sport.js";
+import { detailsPage } from "./views/details.js";
 
 const root = document.body;
 
@@ -18,6 +19,7 @@ page('/login', loginPage);
 page('/register', registerPage);
 page('/create', createPage);
 page('/home/:sport',sportPage);
+page('/:newsId/details', detailsPage);
 
 page.start();
 

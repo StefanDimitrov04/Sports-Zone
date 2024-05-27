@@ -1,6 +1,6 @@
 import {html} from "../../node_modules/lit-html/lit-html.js";
 import { createArticle } from "../data/news.js";
-import { createSubmitHandler } from "../utils.js";
+import { createSubmitHandler, getUserData } from "../utils.js";
 
 const createArticleLayout = (onCreate) => html
 `
@@ -29,6 +29,7 @@ const createArticleLayout = (onCreate) => html
 `;
 
 export function createPage(ctx) {
+
     ctx.render(createArticleLayout(createSubmitHandler(onCreate)));
 
     async function onCreate({
@@ -36,14 +37,19 @@ export function createPage(ctx) {
         title,
         matchDescrp,
         image,
+
     }) { 
+
+        const data = getUserData();
+        const ownerId = data._id;
 
         if([sport, title, matchDescrp, image].some(f => f == '')) {
             throw new Error('All fields are required!');
         }
 
-        const article = await createArticle({sport, title, matchDescrp, image});
-        ctx.page.redirect('/');
+        await createArticle({sport, title, matchDescrp, image, ownerId});
 
+        ctx.page.redirect('/');
     }
+
 }

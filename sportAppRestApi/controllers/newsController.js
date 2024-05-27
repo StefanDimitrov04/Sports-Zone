@@ -6,7 +6,6 @@ router.get('/home', async (req, res) => {
     try {
         const articles = await newsManager.getAll();
         res.json(articles);
-        console.log(req.body);
     } catch (error) {
         res.status(400).json({error: error.message});
     }
@@ -14,8 +13,9 @@ router.get('/home', async (req, res) => {
 
 router.get('/:newsId', async (req, res) => {
     try {
-        const news  = await newsManager.getOne(req.body.newsId);
+        const news  = await newsManager.getOne(req.params.newsId);
         res.json(news);
+        console.log(news.ownerId)
     } catch (error) {
         res.status(500).json({message: error.message});
     }

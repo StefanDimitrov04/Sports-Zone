@@ -36,8 +36,8 @@ const homeTemplate = (news) => html`
     const newsCard = (news) => html`
     <div class="news-section">
     <article class="big-news">
-      <h2>${news.title}</h2>
-      <p>${news.matchDescrp}</p>
+    <a href="/${news._id}/details"><h2>${news.title}</h2></a>
+      <p>${news.matchDescrp.slice(0, 100) + '...'}</p>
     </article>
   </div>
     `
