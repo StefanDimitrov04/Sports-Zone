@@ -1,18 +1,19 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { getLeague } from "../data/league.js";
 import { getAllNews, getNewsForSport } from "../data/news.js";
 
-const homeTemplate = (news) => html`
+const homeTemplate = (news, standings) => html`
       
        ${news.length > 0 ? news.map(newsCard) : html`There arent any news!`}
     
         <aside class="standing-section">
           <h2>League Standings</h2>
           <select id="leagueSelect">
-            <option value="france">France</option>
-            <option value="bulgaria">Bulgaria</option>
-            <option value="england">England</option>
-            <option value="spain">Spain</option>
-            <option value="germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Bulgaria">Bulgaria</option>
+            <option value="England">England</option>
+            <option value="Spain">Spain</option>
+            <option value="Germany">Germany</option>
           </select>
           <table id="standingTable">
             <thead>
@@ -24,7 +25,7 @@ const homeTemplate = (news) => html`
               </tr>
             </thead>
             <tbody>
-        
+           ${standings ? standings.map(standingRow) :  html`<tr><td colspan="4">Select a league to see standings.</td></tr>`}
             </tbody>
           </table>
         </aside>
@@ -42,18 +43,33 @@ const homeTemplate = (news) => html`
   </div>
     `
 
+    const standingRow = (team, index) => html`
+    <tr>
+        <td>${index + 1}</td>
+        <td>${team.clubName}</td>
+        <td>${team.clubPoints}</td>
+        <td>${team.matchesPlayed}</td>
+    </tr>
+    `
+
 
 export async function homePage(ctx) {
   const news = await getAllNews();
+  let standings = null;
     ctx.render(homeTemplate(news));
+
+    document.getElementById('leagueSelect').addEventListener('change', async function() {
+      
+      const country = this.value;
+      const league = await getLeague(country);
+
+      standings = league.teams;
+
+      ctx.render(homeTemplate(news, standings))
+
+    })
 }
 
-const dataForTable = () => html`
-<td>1</td>
-<td>Balkan</td>
-<td>45</td>
-<td>20</td>
-`
 
 // document.addEventListener('DOMContentLoaded', function() {
 //     const leagueSelect = document.getElementById('leagueSelect');
