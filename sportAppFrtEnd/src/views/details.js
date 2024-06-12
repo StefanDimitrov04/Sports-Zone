@@ -33,7 +33,7 @@ const detailsTemplate = (article) => html`
 export async function detailsPage(ctx) {
 
     const userData = getUserData();
-    const userId = userData._id;
+    const userId = userData?._id;
     const id = ctx.params.newsId;
 
     const article = await getSingleArticle(id);

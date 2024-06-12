@@ -1,18 +1,19 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getNewsForSport } from "../data/news.js";
+import {getLeague} from "../data/league.js";
 
-const sportTemplate = (news) => html`
+const sportTemplate = (news, standings) => html`
       
        ${news.length > 0 ? news.map(sportCard) : html`There arent any news!`}
     
         <aside class="standing-section">
           <h2>League Standings</h2>
           <select id="leagueSelect">
-            <option value="france">France</option>
-            <option value="bulgaria">Bulgaria</option>
-            <option value="england">England</option>
-            <option value="spain">Spain</option>
-            <option value="germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Bulgaria">Bulgaria</option>
+            <option value="England">England</option>
+            <option value="Spain">Spain</option>
+            <option value="Germany">Germany</option>
           </select>
           <table id="standingTable">
             <thead>
@@ -24,7 +25,7 @@ const sportTemplate = (news) => html`
               </tr>
             </thead>
             <tbody>
-              <!-- Table data will be populated dynamically -->
+              ${standings ? standings.map(standingRow) : html`<tr><td colspan="4">Select a league to see standings.</td></tr>`}
             </tbody>
           </table>
         </aside>
@@ -41,9 +42,32 @@ const sportTemplate = (news) => html`
   </div>
     `
 
+    const standingRow = (team, index) => html`
+    <tr>
+        <td>${index + 1}</td>
+        <td>${team.clubName}</td>
+        <td>${team.clubPoints}</td>
+        <td>${team.matchesPlayed}</td>
+    </tr>
+    `
 
-export async function sportPage(ctx) {
-    const sportName = ctx.params.sport;
-  const sport = await getNewsForSport(sportName);
-    ctx.render(sportTemplate(sport));
-}
+
+    export async function sportPage(ctx) {
+      const sportName = ctx.params.sport;
+      const news = await getNewsForSport(sportName);
+      let standings = null;
+      ctx.render(sportTemplate(news));
+    
+      document.getElementById("leagueSelect").addEventListener('change', async function() {
+        const country = this.value;
+    
+        try {
+          const league = await getLeague(sportName, country);
+          standings = league.teams;
+        } catch (error) {
+          standings = null;
+        }
+    
+        ctx.render(sportTemplate(news, standings));
+      });
+    }

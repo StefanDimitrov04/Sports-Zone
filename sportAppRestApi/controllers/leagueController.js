@@ -3,12 +3,13 @@ const { getLeague } = require('../managers/leagueManager');
 const League = require("../models/League");
 const Team = require("../models/Team");
 
-router.get('/:country', async (req, res) => {
+router.get('/:sport/:country', async (req, res) => {
 
     try {
 
    const country = req.params.country;
-   const league = await getLeague({country}).populate('teams');
+   const sport = req.params.sport;
+   const league = await getLeague({sport, country}).populate('teams');
    res.json(league);
 
     } catch (error) {
@@ -17,13 +18,14 @@ router.get('/:country', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const {country, teams}  = req.body;
+    const {sport, country, teams}  = req.body;
 
     try {
         
         const savedTeams = await Team.insertMany(teams);
 
         const league = new League({
+            sport,
         country,
         teams: savedTeams.map(team => team._id)
         });

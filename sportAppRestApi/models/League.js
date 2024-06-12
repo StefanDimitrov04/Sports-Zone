@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const LeaguesSchema = new mongoose.Schema({
+
+    sport: {
+        type: String,
+        required: true
+    },
     country: {
         type: String,
         required: true,

@@ -6,7 +6,7 @@ const endpoints = {
     leagueCountry: '/league',
 };
 
-export async function getLeague(country) {
-    const league = await get(`${endpoints.leagueCountry}/${country}`);
+export async function getLeague(sport, country) {
+    const league = await get(`/${endpoints.leagueCountry}/${sport}/${country}`);
     return league;
 }
