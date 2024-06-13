@@ -40,16 +40,20 @@ const homeTemplate = (news, standings) => html`
      
     `;
 
-
-
-    const newsCard = (news) => html`
-    <div class="news-section">
+  const newsCard = (news) => html`
+  <div class="news-section">
     <article class="big-news">
-    <a href="/${news._id}/details"><h2>${news.title}</h2></a>
-      <p>${news.matchDescrp.slice(0, 100) + '...'}</p>
+      <a href="/${news._id}/details"><h2>${news.title}</h2></a>
+      <div class="news-content">
+        <img src="${news.image}" alt="${news.title}">
+        <p>${news.matchDescrp.slice(0, 150) + '...'}</p>
+        <div class="full-text-overlay">
+          <p>${news.matchDescrp.slice(0, 300) + '...'}</p>
+        </div>
+      </div>
     </article>
   </div>
-    `
+`;
 
     const standingRow = (team, index) => html`
     <tr>
@@ -69,12 +73,10 @@ export async function homePage(ctx) {
   let standings = null;
 
 
-  const renderStandings = async () => {
-    
+ const renderStandings = async () => {
     try {
       const league = await getLeague(selectedSport,selectedCountry);
       standings = league.teams;
-      
     } catch (error) {
       standings = null;
     }
@@ -82,6 +84,7 @@ export async function homePage(ctx) {
   }
 
   ctx.render(homeTemplate(news, standings));
+  await renderStandings();
 
     document.getElementById('leagueSelect').addEventListener('change', async function() {
       

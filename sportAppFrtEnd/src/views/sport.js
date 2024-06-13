@@ -7,10 +7,11 @@ const sportTemplate = (news, standings) => html`
        ${news.length > 0 ? news.map(sportCard) : html`There arent any news!`}
     
         <aside class="standing-section">
-          <h2>League Standings</h2>
+        <h2>League Standings</h2>
+        <div class="table-container">
           <select id="leagueSelect">
+          <option value="Bulgaria">Bulgaria</option>
             <option value="France">France</option>
-            <option value="Bulgaria">Bulgaria</option>
             <option value="England">England</option>
             <option value="Spain">Spain</option>
             <option value="Germany">Germany</option>
@@ -28,8 +29,8 @@ const sportTemplate = (news, standings) => html`
               ${standings ? standings.map(standingRow) : html`<tr><td colspan="4">Select a league to see standings.</td></tr>`}
             </tbody>
           </table>
-        </aside>
-     
+          </div>
+        </aside>  
     `;
 
     const sportCard = (sport) => html`
@@ -55,8 +56,21 @@ const sportTemplate = (news, standings) => html`
     export async function sportPage(ctx) {
       const sportName = ctx.params.sport;
       const news = await getNewsForSport(sportName);
+      let begCountry = "Bulgaria";
       let standings = null;
-      ctx.render(sportTemplate(news));
+
+      const renderStandings = async () => {
+        try {
+          const league = await getLeague(sportName,begCountry);
+          standings = league.teams;
+        } catch (error) {
+          standings = null;
+        }
+        ctx.render(sportTemplate(news, standings));
+      }
+
+      ctx.render(sportTemplate(news, standings));
+      await renderStandings();
     
       document.getElementById("leagueSelect").addEventListener('change', async function() {
         const country = this.value;

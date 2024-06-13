@@ -94,85 +94,96 @@ body {
   /* STANDINGS CSS */
 
   .table-container {
-    max-height: 300px; /* Set a maximum height for the container */
-    overflow-y: auto; /* Enable vertical scrolling for overflow content */
+    max-height: 300px; 
+    overflow-y: auto; 
   }
   
   #standingTable {
-    width: 100%; /* Make the table fill the container */
-    border-collapse: collapse; /* Collapse table borders */
+    width: 100%; 
+    border-collapse: collapse; 
   }
   
   #standingTable th, #standingTable td {
-    padding: 8px; /* Add padding to table cells */
-    border: 1px solid #ccc; /* Add border to table cells */
+    padding: 8px; 
+    border: 1px solid #ccc; 
   }
   
   #standingTable th {
-    background-color: #f0f0f0; /* Add background color to table headers */
-    text-align: left; /* Align text to the left in table headers */
+    background-color: #f0f0f0; 
+    text-align: left;
   }
 
 
   .standing-section {
-    display: flex; /* Use flexbox to align items horizontally */
-    flex-direction: column; /* Arrange items vertically */
-    border: 1px solid #ccc; /* Add border around the standing section */
-    border-radius: 5px; /* Add border radius for rounded corners */
-    padding: 10px; /* Add padding to the standing section */
+    width: 450px; 
+    position: fixed;
+    right: 20px;
+    top: 150px; 
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; 
+    flex-direction: column; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 10px; 
   }
   
   .standing-section h2 {
-    margin-top: 0; /* Remove margin from the top of the heading */
+    margin-top: 0; 
+    color: white;
   }
   
   .sport-buttons {
-    margin-bottom: 10px; /* Add spacing between the buttons and the select dropdown */
+    margin-bottom: 10px; 
   }
   
   #leagueSelect {
-    padding: 8px; /* Add padding to the select dropdown */
-    border-radius: 5px; /* Add border radius for rounded corners */
+    padding: 8px; 
+    border-radius: 5px;
   }
   
   #standingTable {
-    border-collapse: collapse; /* Collapse table borders */
-    width: 100%; /* Make the table fill the container */
+    border-collapse: collapse;
+    width: 100%; 
   }
   
   #standingTable th, #standingTable td {
-    padding: 8px; /* Add padding to table cells */
-    border: 1px solid #ccc; /* Add border to table cells */
+    padding: 8px; 
+    border: 1px solid #ccc;
   }
   
   #standingTable th {
-    background-color: #f0f0f0; /* Add background color to table headers */
-    text-align: left; /* Align text to the left in table headers */
+    background-color: #f0f0f0; 
+    text-align: left;
+  }
+
+  #standingTable tr td {
+    background-color: lightgreen;
   }
 
 
   .sport-buttons {
-    display: flex; /* Use flexbox to arrange buttons horizontally */
-    justify-content: center; /* Center the buttons horizontally */
-    margin-bottom: 10px; /* Add some spacing between the buttons and the select dropdown */
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 10px; 
   }
   
   .sport-button {
-    padding: 10px 20px; /* Add padding to the buttons */
-    margin: 0 5px; /* Add some spacing between the buttons */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Add border radius for rounded corners */
-    background-color: #4CAF50; /* Set background color for the buttons */
-    color: white; /* Set text color */
-    cursor: pointer; /* Set cursor to pointer on hover */
+    padding: 10px 20px; 
+    margin: 0 5px; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: #4CAF50; 
+    color: white; 
+    cursor: pointer; 
   }
   
   .sport-button:hover {
-    background-color: #45a049; /* Change background color on hover */
+    background-color: #45a049; 
   }
   
   .sport-button:focus {
-    outline: none; /* Remove focus outline */
+    outline: none; 
   }
 
 
@@ -201,26 +212,75 @@ body {
     background-color: #f9f9f9;
     padding: 20px;
     margin: 10px;
-    flex: 1 0 40%; /* Adjust this value for different sizes */
+    flex: 1 0 50%; 
   }
   
-  /* .big-news {
-    flex: 1 0 60%; /* Adjust this value for different sizes */
- /* }
-  
-  .news-section {
-    width: 70%; /* Adjust as needed */
-  /*  padding: 20px;
-  } */
+ 
 
-  .container {
+  .news-section {
+    width: calc(35% - 10px);
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  
+  .news-section:hover {
+    transform: translateY(-5px);
+  }
+  
+  .big-news {
+    padding: 20px;
+  }
+  
+  .big-news h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .news-content {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* Adjust as needed */
+    align-items: flex-start;
   }
+  
+  .big-news img {
+    width: 70%;
+    max-width: 150px;
+    margin-right: 20px;
+    border-radius: 3px;
+  }
+  
+  .big-news p {
+    color: #666;
+    flex: 1;
+  }
+  
+  .full-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .news-content:hover .full-text-overlay {
+    opacity: 1;
+  } 
 
   .news-section {
-    width: calc(50% - 10px); /* Adjust the width to make two columns with a margin of 10px between them */
+    width: calc(60% - 10px);
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -247,10 +307,10 @@ body {
   }
 
   .big-news img {
-    width: 100%;
+    width: 50%;
     border-radius: 5px;
-  }
-  
+  } 
+
   
 
   /* LOGIN TEMPLATE CSS*/
