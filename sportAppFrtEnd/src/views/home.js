@@ -2,7 +2,7 @@ import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getLeague } from "../data/league.js";
 import { getAllNews, getNewsForSport } from "../data/news.js";
 
-const homeTemplate = (news, standings) => html`
+const homeTemplate = (news, standings, comments) => html`
       
        ${news.length > 0 ? news.map(newsCard) : html`There arent any news!`}
     
@@ -36,8 +36,13 @@ const homeTemplate = (news, standings) => html`
             </tbody>
         </table>
     </div>
+    <div class="fan-comments">
+          <h2>Recent Comments</h2>
+          <ul>
+            ${comments.map(commentCard)}
+          </ul>
+        </div>
 </aside>
-     
     `;
 
   const newsCard = (news) => html`
@@ -64,6 +69,19 @@ const homeTemplate = (news, standings) => html`
     </tr>
     `
 
+    const commentCard = (comment) => html`
+  <li>
+    <p><strong>${comment.userName}</strong> on <a href="${comment.articleLink}">${comment.sport}</a></p>
+    <p>${comment.text}</p>
+  </li>
+`;
+
+const comments = [
+  { userName: 'John Doe', text: 'Great match!', sport: 'Football', articleLink: '/article/1' },
+  { userName: 'Jane Smith', text: 'Amazing performance by the team.', sport: 'Basketball', articleLink: '/article/2' },
+  { userName: 'Sam Wilson', text: 'Can’t wait for the next game.', sport: 'Tennis', articleLink: '/article/3' },
+];
+
 
 export async function homePage(ctx) {
   const news = await getAllNews();
@@ -80,10 +98,10 @@ export async function homePage(ctx) {
     } catch (error) {
       standings = null;
     }
-    ctx.render(homeTemplate(news, standings));
+    ctx.render(homeTemplate(news, standings, comments));
   }
 
-  ctx.render(homeTemplate(news, standings));
+  ctx.render(homeTemplate(news, standings, comments));
   await renderStandings();
 
     document.getElementById('leagueSelect').addEventListener('change', async function() {

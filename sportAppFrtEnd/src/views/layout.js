@@ -31,6 +31,22 @@ export const layoutTemplate = (userData, content) => html `
 
   </header>
    <main> ${content} </main>
+
+    <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h2>About Us</h2>
+        <p>We provide the latest news and updates on various sports, including Football, Basketball, Tennis, and more.</p>
+      </div>
+      <div class="footer-section contact">
+        <h2>Contact Us</h2>
+        <p>Email: s.dimitrov2004@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Sports News. All rights reserved.</p>
+    </div>
+  </footer>
 `;
 
 

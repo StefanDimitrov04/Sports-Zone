@@ -2,7 +2,7 @@ import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getNewsForSport } from "../data/news.js";
 import {getLeague} from "../data/league.js";
 
-const sportTemplate = (news, standings) => html`
+const sportTemplate = (news, standings, sportName) => html`
       
        ${news.length > 0 ? news.map(sportCard) : html`There arent any news!`}
     
@@ -10,11 +10,17 @@ const sportTemplate = (news, standings) => html`
         <h2>League Standings</h2>
         <div class="table-container">
           <select id="leagueSelect">
-          <option value="Bulgaria">Bulgaria</option>
+          ${sportName == "Tennis" ? html`
+            <option value="International">ATP RANKING</option>
+            ` : html`
+            
+         <option value="Bulgaria">Bulgaria</option>
             <option value="France">France</option>
             <option value="England">England</option>
             <option value="Spain">Spain</option>
-            <option value="Germany">Germany</option>
+            <option value="Germany">Germany</option>    
+            `}
+       
           </select>
           <table id="standingTable">
             <thead>
@@ -30,7 +36,7 @@ const sportTemplate = (news, standings) => html`
             </tbody>
           </table>
           </div>
-        </aside>  
+        </aside>
     `;
 
     const sportCard = (sport) => html`
@@ -66,7 +72,7 @@ const sportTemplate = (news, standings) => html`
         } catch (error) {
           standings = null;
         }
-        ctx.render(sportTemplate(news, standings));
+        ctx.render(sportTemplate(news, standings, sportName));
       }
 
       ctx.render(sportTemplate(news, standings));

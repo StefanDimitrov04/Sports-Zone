@@ -3,6 +3,20 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  html, body {
+    height: 100%;
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  
+  main {
+    flex: 1; /* This pushes the footer to the bottom */
+  }
   
   header {
     background-color: #333;
@@ -89,6 +103,8 @@ body {
   nav ul li a:hover {
     background-color: #111;
   }
+
+  
    
 
   /* STANDINGS CSS */
@@ -116,7 +132,7 @@ body {
 
   .standing-section {
     width: 450px; 
-    position: fixed;
+    position:absolute;
     right: 20px;
     top: 150px; 
     padding: 10px;
@@ -212,7 +228,7 @@ body {
     background-color: #f9f9f9;
     padding: 20px;
     margin: 10px;
-    flex: 1 0 50%; 
+    flex: 1 0 30%; 
   }
   
  
@@ -310,6 +326,41 @@ body {
     width: 50%;
     border-radius: 5px;
   } 
+
+  /* COMMENTS SECTION */
+  .fan-comments {
+    margin-top: 20px;
+    max-height: 300px; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  .fan-comments h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .fan-comments ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Add margin to remove default margins */
+  }
+  
+  .fan-comments li {
+    background: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fan-comments a {
+    color: #4CAF50;
+    text-decoration: none;
+  }
+  
+  .fan-comments a:hover {
+    text-decoration: underline;
+  }
 
   
 
@@ -556,3 +607,48 @@ button[type="submit"]:hover {
   cursor: pointer;
   border-radius: 5px;
 }
+
+/* FOOTER CSS */
+
+/* FOOTER STYLES */
+.footer {
+  background: #333;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+  margin-bottom: 10px;
+}
+
+.footer-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #f9f9f9;
+}
+
+.footer-section p {
+  color: #ddd;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #444;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #ddd;
+}
+
+
