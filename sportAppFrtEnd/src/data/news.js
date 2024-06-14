@@ -3,7 +3,8 @@ import { get, post } from "./api.js"
 const endpoints = {
    home: "/news/home", 
    create: "/news/create",
-   getSingleArt: "/news/"
+   getSingleArt: "/news/",
+   addComment: "/news"
 }
 
 
@@ -17,6 +18,11 @@ export async function getAllNews() {
     const article = await post(endpoints.create, data);
     return article;
  }
+
+ export async function addComment(newsId, userId, username, commentText) {   
+   const comment = await post(`${endpoints.addComment}/${newsId}/comment`, {userId, username, commentText});
+   return comment;
+};
 
  export async function getNewsForSport(sport) {
     const newsForSport = await get(`/news/home/${sport}`);

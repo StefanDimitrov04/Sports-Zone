@@ -1,9 +1,9 @@
-import { getSingleArticle } from "../data/news.js";
+import { addComment, getSingleArticle } from "../data/news.js";
 import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getUserData } from "../utils.js";
 
 
-const detailsTemplate = (article) => html`
+const detailsTemplate = (article, comments) => html`
 
 <body>
     <div class="article-container">
@@ -22,7 +22,13 @@ const detailsTemplate = (article) => html`
     </div>
     <div class="comment-section">
     <h2>Comments</h2>
-    <div id="comments-container"></div>
+    <div id="comments-container">
+    ${comments && comments.length > 0 ? comments.map(comment => html`
+        <div class="comment">
+            <strong>${comment.username}</strong>: ${comment.commentText}
+        </div>
+        `) : html`<h1>No comments yet!</h1>`}
+    </div>
     <textarea id="new-comment" placeholder="Add a comment..."></textarea>
     <button id="add-comment-button">Add Comment</button>
 </div>
@@ -30,18 +36,43 @@ const detailsTemplate = (article) => html`
 `;
 
 
+
 export async function detailsPage(ctx) {
 
     const userData = getUserData();
     const userId = userData?._id;
+    const userUsername = userData?.username;
     const id = ctx.params.newsId;
-
+    
     const article = await getSingleArticle(id);
+    const comments = article.comments;
+    ctx.render(detailsTemplate(article, comments));
 
     if(userData && userId == article.ownerId) {
         article.canEdit = true;
     };
 
-    ctx.render(detailsTemplate(article));
+    console.log(comments);
+
+    const renderPage = () => {
+        ctx.render(detailsTemplate(article, comments));
+        addCommentButton();
+    };
+    
+
+   const addCommentButton = () => { document.getElementById("add-comment-button").addEventListener('click', async function() {
+        const commentText = document.getElementById("new-comment").value.trim();
+        try {
+            const comment = await addComment(id,userId, userUsername, commentText);
+            comments.push({username: userUsername, commentText});
+            document.getElementById("new-comment").value = "";
+            renderPage();
+        } catch (error) {
+            console.log(error.message);
+        }
+
+    }) };
+
+    renderPage();
 
 }

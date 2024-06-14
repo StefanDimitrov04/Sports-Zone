@@ -20,7 +20,21 @@ const NewsSchema = new mongoose.Schema({
     ownerId: {
         type: mongoose.Types.ObjectId,
         ref: "User",
-    }
+    },
+    comments: [{
+        userId: {
+            type: mongoose.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
+        username: {
+            type: String,
+        },
+        commentText: {
+            type: String, 
+            required: true,
+        }
+    }]
 });
 
 const News = mongoose.model("News", NewsSchema);
