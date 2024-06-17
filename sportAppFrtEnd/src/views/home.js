@@ -2,7 +2,7 @@ import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getLeague } from "../data/league.js";
 import { getAllNews, getNewsForSport } from "../data/news.js";
 
-const homeTemplate = (news, standings, comments) => html`
+const homeTemplate = (news, standings, comments, selectedSport) => html`
       
        ${news.length > 0 ? news.map(newsCard) : html`There arent any news!`}
     
@@ -16,11 +16,15 @@ const homeTemplate = (news, standings, comments) => html`
         <button class="sport-button" data-sport="Basketball">Basketball</button>
     </div>
         <select id="leagueSelect">
-        <option value="Bulgaria">Bulgaria</option>
+         ${selectedSport == "Tennis" ? html`
+      <option value="Tennis">ATP Ranking</option>
+      ` : html`
+      <option value="Bulgaria">Bulgaria</option>
             <option value="France">France</option>
             <option value="England">England</option>
             <option value="Spain">Spain</option>
             <option value="Germany">Germany</option>
+      `}
         </select>
         <table id="standingTable">
             <thead>
@@ -98,7 +102,7 @@ export async function homePage(ctx) {
     } catch (error) {
       standings = null;
     }
-    ctx.render(homeTemplate(news, standings, comments));
+    ctx.render(homeTemplate(news, standings, comments, selectedSport));
   }
 
   ctx.render(homeTemplate(news, standings, comments));

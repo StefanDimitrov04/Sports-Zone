@@ -9,6 +9,8 @@ import { createPage } from "./views/create.js";
 import { getNewsForSport } from "./data/news.js";
 import { sportPage } from "./views/sport.js";
 import { detailsPage } from "./views/details.js";
+import { logout } from "./data/auth.js";
+import { editPage } from "./views/edit.js";
 
 const root = document.body;
 
@@ -17,9 +19,14 @@ page('index.html', '/');
 page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);
+page('/logout', () => {
+  logout();
+  page.redirect('/');
+});
 page('/create', createPage);
 page('/home/:sport',sportPage);
 page('/:newsId/details', detailsPage);
+page('/:newsId/details/edit', editPage);
 
 page.start();
 

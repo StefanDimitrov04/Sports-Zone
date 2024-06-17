@@ -30,6 +30,7 @@ router.post('/login', async (req,res) => {
 })
 
 router.get('/logout', (req, res) => {
+    res.json({message: "logged out!"});
     res.end();
 });
 

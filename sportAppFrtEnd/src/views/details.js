@@ -3,7 +3,7 @@ import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getUserData } from "../utils.js";
 
 
-const detailsTemplate = (article, comments) => html`
+const detailsTemplate = (article, comments, userData) => html`
 
 <body>
     <div class="article-container">
@@ -15,7 +15,7 @@ const detailsTemplate = (article, comments) => html`
             <p class="article-description">${article.matchDescrp}</p>
             ${article.canEdit ? html `
             <div class="article-buttons">
-            <button id="edit-article-button">Edit</button>
+            <a href="/${article._id}/details/edit" class="edit-article-button">Edit</a>
             <button id="delete-article-button">Delete</button>
         </div>
             ` : null}
@@ -29,8 +29,10 @@ const detailsTemplate = (article, comments) => html`
         </div>
         `) : html`<h1>No comments yet!</h1>`}
     </div>
-    <textarea id="new-comment" placeholder="Add a comment..."></textarea>
-    <button id="add-comment-button">Add Comment</button>
+    ${userData ? html`
+        <textarea id="new-comment" placeholder="Add a comment..."></textarea>
+        <button id="add-comment-button">Add Comment</button>
+        ` : html ``}
 </div>
 </body>
 `;
@@ -52,10 +54,8 @@ export async function detailsPage(ctx) {
         article.canEdit = true;
     };
 
-    console.log(comments);
-
     const renderPage = () => {
-        ctx.render(detailsTemplate(article, comments));
+        ctx.render(detailsTemplate(article, comments, userData));
         addCommentButton();
     };
     

@@ -34,7 +34,7 @@ router.get('/home/:sport', async (req, res) => {
 router.post('/create', async (req,res) => {
     try {
         const newsData = await newsManager.create(req.body);
-        res.status(201).json({messsage: "Article created succesfully"}, newsData);
+        res.json({messsage: "Article created succesfully", newsData});
     } catch (error) {
         res.status(400).json({message: error.message});
     }  
@@ -42,10 +42,10 @@ router.post('/create', async (req,res) => {
 
 router.put('/:newsId/edit', async(req,res) => {
     try {
-        const newsId = req.body.newsId;
+        const newsId = req.params.newsId;
         const newsData = req.body;
         const news = await newsManager.edit(newsId, newsData);
-        res.status(200).json({message: "Film edited successfully!"});
+        res.status(200).json({message: "Film edited successfully!", news});
     } catch (error) {
         res.status(400).json({message: error.message});
     }

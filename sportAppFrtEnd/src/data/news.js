@@ -1,10 +1,10 @@
-import { get, post } from "./api.js"
+import { get, post, put } from "./api.js"
 
 const endpoints = {
    home: "/news/home", 
    create: "/news/create",
    getSingleArt: "/news/",
-   addComment: "/news"
+   addComment: "/news",
 }
 
 
@@ -32,5 +32,9 @@ export async function getAllNews() {
  export async function getSingleArticle(id) {
    const data = await get(`${endpoints.getSingleArt}${id}`);
    return data;
+};
 
- }
+export async function editArticle(id, {sport, title, matchDescrp, image}) {
+   const articleEdit = await put(`/news/${id}/edit`, {sport, title, matchDescrp, image});
+   return articleEdit;
+}
