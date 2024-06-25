@@ -71,48 +71,6 @@ router.delete('/:newsId/delete', async (req, res) => {
 
 });
 
-// router.post('/:newsId/comment', async (req, res) => {
-//     const {userId, username, commentText} = req.body;
-//     const newsId = req.params.newsId; 
-//      try {
-      
-//         const article = await newsManager.getOne(newsId);
-
-//         if(article) {
-//             article.comments.push({userId, username, commentText});
-//             await article.save();
-//             console.log("commented");
-//            return res.status(200).json({message: "Comment added successfully!"});
-//         } else {
-//             return res.status(404).json({message: 'Article not found' });
-//         }
-        
-//      } catch (error) {
-//         console.log("error", error);
-//        return res.status(400).json(error.message);
-//      }
-// })
-
-// router.post('/:newsId/comment', async (req, res) => {
-//     const {userId, username, commentText} = req.body;
-//     const newsId = req.params.newsId;
-
-//     try {
-//         const comment = new Comment({userId, username, commentText, articleId: newsId});
-//         await comment.save();
-
-//         const article = await newsManager.getOne(newsId);
-//         if(article) {
-//             article.comments.push({username, commentText});
-//             await article.save();
-//             res.status(200).json({ message: "Comment added successfully"});
-//         } else {
-//             res.status(404).json({message: "Artcile not found"});
-//         }
-//     } catch (error) {
-//         res.status(400).json(error.message);
-//     }
-// });
 
 router.get('/:newsId/comments', async (req, res) => {
     const newsId = req.params.newsId;

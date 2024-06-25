@@ -21,10 +21,6 @@ const NewsSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
     },
-    // comments: [{
-    //     type: mongoose.Types.ObjectId,
-    //     ref: "Comment",
-    // }]
     comments: [{
         username: {
             type: String,

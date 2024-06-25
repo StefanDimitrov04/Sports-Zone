@@ -39,44 +39,6 @@ const detailsTemplate = (article, comments, userData) => html`
 
 
 
-// export async function detailsPage(ctx) {
-
-//     const userData = getUserData();
-//     const userId = userData?._id;
-//     const userUsername = userData?.username;
-//     const id = ctx.params.newsId;
-    
-//     const article = await getSingleArticle(id);
-    
-//  // ctx.render(detailsTemplate(article, comments));
-
-//     if(userData && userId == article.ownerId) {
-//         article.canEdit = true;
-//     };
-
-//    async function renderPage() {
-//         const comments = await getCommentsForArticle(id);
-//         ctx.render(detailsTemplate(article, comments, userData));
-//         addCommentButton();
-//     };
-    
-
-//    const addCommentButton = () => { document.getElementById("add-comment-button").addEventListener('click', async function() {
-//         const commentText = document.getElementById("new-comment").value.trim();
-//         try {
-//              await addComment(id,userId, userUsername, commentText);
-//              comments.push({ username: userUsername, commentText });
-//             document.getElementById("new-comment").value = "";
-//             renderPage();
-//         } catch (error) {
-//             console.log(error);
-//         }
-
-//     }) };
-
-//      renderPage();
-// }
-
 export async function detailsPage(ctx) {
     const userData = getUserData();
     const userId = userData?._id;

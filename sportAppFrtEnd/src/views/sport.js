@@ -39,15 +39,6 @@ const sportTemplate = (news, standings, sportName) => html`
         </aside>
     `;
 
-  //   const sportCard = (sport) => html`
-  //   <div class="news-section">
-  //   <article class="big-news">
-  //     <h2>${sport.title}</h2>
-  //     <p>${sport.matchDescrp}</p>
-  //     <img src="${sport.image}" alt="${sport.title}">
-  //   </article>
-  // </div>
-  //   `
 
     const sportCard = (sport) => html`
     <div class="news-section">
