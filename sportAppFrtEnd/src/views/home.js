@@ -1,6 +1,6 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getLeague } from "../data/league.js";
-import { getAllNews, getNewsForSport } from "../data/news.js";
+import { getAllNews, getLastComments, getNewsForSport } from "../data/news.js";
 
 const homeTemplate = (news, standings, comments, selectedSport) => html`
       
@@ -10,10 +10,10 @@ const homeTemplate = (news, standings, comments, selectedSport) => html`
     <h2>League Standings</h2>
     <div class="table-container">
       <div class="sport-buttons">
-        <button class="sport-button" data-sport="Volleyball">Volleyball</button>
-        <button class="sport-button" data-sport="Football">Football</button>
-        <button class="sport-button" data-sport="Tennis">Tennis</button>
-        <button class="sport-button" data-sport="Basketball">Basketball</button>
+      <button class="sport-button" data-sport="Football">Football</button>
+      <button class="sport-button" data-sport="Basketball">Basketball</button>
+      <button class="sport-button" data-sport="Tennis">Tennis</button>
+      <button class="sport-button" data-sport="Volleyball">Volleyball</button>
     </div>
         <select id="leagueSelect">
          ${selectedSport == "Tennis" ? html`
@@ -75,17 +75,10 @@ const homeTemplate = (news, standings, comments, selectedSport) => html`
 
     const commentCard = (comment) => html`
   <li>
-    <p><strong>${comment.userName}</strong> on <a href="${comment.articleLink}">${comment.sport}</a></p>
-    <p>${comment.text}</p>
+    <p><strong>${comment.username}</strong> on <a href="${comment.articleId._id}/details">${comment.articleId.title}</a></p>
+    <p>${comment.commentText}</p>
   </li>
 `;
-
-const comments = [
-  { userName: 'John Doe', text: 'Great match!', sport: 'Football', articleLink: '/article/1' },
-  { userName: 'Jane Smith', text: 'Amazing performance by the team.', sport: 'Basketball', articleLink: '/article/2' },
-  { userName: 'Sam Wilson', text: 'Can’t wait for the next game.', sport: 'Tennis', articleLink: '/article/3' },
-];
-
 
 export async function homePage(ctx) {
   const news = await getAllNews();
@@ -94,6 +87,8 @@ export async function homePage(ctx) {
   let selectedCountry = "Bulgaria";
   let standings = null;
 
+  let comments = await getLastComments();
+  console.log(comments);
 
  const renderStandings = async () => {
     try {

@@ -692,7 +692,7 @@ button[type="submit"]:hover {
   color: #fff;
   padding: 10px 0;
   text-align: center;
-  position: sticky;
+  position:unset;
 }
 
 .footer-content {

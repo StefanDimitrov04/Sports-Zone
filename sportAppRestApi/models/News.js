@@ -21,18 +21,21 @@ const NewsSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
     },
+    // comments: [{
+    //     type: mongoose.Types.ObjectId,
+    //     ref: "Comment",
+    // }]
     comments: [{
-        userId: {
-            type: mongoose.Types.ObjectId,
-            ref: "User",
-            required: true
-        },
         username: {
             type: String,
         },
         commentText: {
-            type: String, 
+            type: String,
             required: true,
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
         }
     }]
 });

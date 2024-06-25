@@ -20,8 +20,13 @@ export async function getAllNews() {
  }
 
  export async function addComment(newsId, userId, username, commentText) {   
-   const comment = await post(`${endpoints.addComment}/${newsId}/comment`, {userId, username, commentText});
-   return comment;
+   try {
+      const comment = await post(`${endpoints.addComment}/${newsId}/comment`, {newsId, userId, username, commentText});
+      return comment;
+      
+   } catch (error) {
+      console.log(error);
+   }
 };
 
  export async function getNewsForSport(sport) {
@@ -34,7 +39,17 @@ export async function getAllNews() {
    return data;
 };
 
+export async function getCommentsForArticle(id) {
+   const commentsForArticle = await get(`/news/${id}/comments`);
+   return commentsForArticle;
+}
+
 export async function editArticle(id, {sport, title, matchDescrp, image}) {
    const articleEdit = await put(`/news/${id}/edit`, {sport, title, matchDescrp, image});
    return articleEdit;
+}
+
+export async function getLastComments() {
+   const last5Comments = await get('/news/latest-comments');
+   return last5Comments;
 }

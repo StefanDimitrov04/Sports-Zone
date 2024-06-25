@@ -1,4 +1,4 @@
-import { addComment, getSingleArticle } from "../data/news.js";
+import { addComment, getCommentsForArticle, getSingleArticle } from "../data/news.js";
 import { html } from "../../node_modules/lit-html/lit-html.js";
 import { getUserData } from "../utils.js";
 
@@ -39,40 +39,79 @@ const detailsTemplate = (article, comments, userData) => html`
 
 
 
-export async function detailsPage(ctx) {
+// export async function detailsPage(ctx) {
 
+//     const userData = getUserData();
+//     const userId = userData?._id;
+//     const userUsername = userData?.username;
+//     const id = ctx.params.newsId;
+    
+//     const article = await getSingleArticle(id);
+    
+//  // ctx.render(detailsTemplate(article, comments));
+
+//     if(userData && userId == article.ownerId) {
+//         article.canEdit = true;
+//     };
+
+//    async function renderPage() {
+//         const comments = await getCommentsForArticle(id);
+//         ctx.render(detailsTemplate(article, comments, userData));
+//         addCommentButton();
+//     };
+    
+
+//    const addCommentButton = () => { document.getElementById("add-comment-button").addEventListener('click', async function() {
+//         const commentText = document.getElementById("new-comment").value.trim();
+//         try {
+//              await addComment(id,userId, userUsername, commentText);
+//              comments.push({ username: userUsername, commentText });
+//             document.getElementById("new-comment").value = "";
+//             renderPage();
+//         } catch (error) {
+//             console.log(error);
+//         }
+
+//     }) };
+
+//      renderPage();
+// }
+
+export async function detailsPage(ctx) {
     const userData = getUserData();
     const userId = userData?._id;
     const userUsername = userData?.username;
     const id = ctx.params.newsId;
     
     const article = await getSingleArticle(id);
-    const comments = article.comments;
-    ctx.render(detailsTemplate(article, comments));
+    let comments = article.comments || [];
 
-    if(userData && userId == article.ownerId) {
+    if (userData && userId === article.ownerId) {
         article.canEdit = true;
-    };
-
-    const renderPage = () => {
+    }
+      
+    ctx.render(detailsTemplate(article, comments, userData));
+     async function renderPage() {
+        const articleComments = await getCommentsForArticle(id);
+        comments = articleComments;
         ctx.render(detailsTemplate(article, comments, userData));
-        addCommentButton();
     };
-    
 
-   const addCommentButton = () => { document.getElementById("add-comment-button").addEventListener('click', async function() {
-        const commentText = document.getElementById("new-comment").value.trim();
-        try {
-            const comment = await addComment(id,userId, userUsername, commentText);
-            comments.push({username: userUsername, commentText});
-            document.getElementById("new-comment").value = "";
-            renderPage();
-        } catch (error) {
-            console.log(error.message);
-        }
+    const addCommentButtonListener = () => {
+        document.getElementById("add-comment-button").addEventListener('click', async function () {
+            const commentText = document.getElementById("new-comment").value.trim();
 
-    }) };
-
-    renderPage();
-
+            try {
+                await addComment(id, userId, userUsername, commentText);
+                document.getElementById("new-comment").value = "";
+                comments.push({ username: userUsername, commentText });
+                renderPage();
+            } catch (error) {
+                console.log(error.message);
+                alert("Failed to add comment.");
+            }
+        });
+    };
+    addCommentButtonListener();
+    renderPage(); 
 }
