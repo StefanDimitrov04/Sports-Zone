@@ -6,6 +6,9 @@ SportsZone is a comprehensive sports website where users can stay updated with t
 
 ### <span style="font-size:larger;">User Authentication</span>
 - **Login:** Secure login functionality for returning users.
+- **ALREADY LOGGED IN USERS:**
+- email: stefo@abv.bg, pass: asdasd;
+- email: peter@abv.bg, pass: asdasd;
 - ![login](https://github.com/StefanDimitrov04/FilmForum-Project/assets/115184100/31b40a8c-9d9b-457a-9098-4345db82d413)
 - **Register:** New users can create an account to join the community and access all features.
 - ![register](https://github.com/StefanDimitrov04/FilmForum-Project/assets/115184100/172321e5-3b94-4af5-bf9c-054ecb512efa)
