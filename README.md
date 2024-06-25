@@ -38,6 +38,6 @@ SportsZone is a comprehensive sports website where users can stay updated with t
 - **Filtered Articles by Sport:** Each sport page sorts and displays articles specific to the chosen sport, allowing users to easily find content relevant to their interests.
 
 ### <span style="font-size:larger;">Technologies Used</span>
-Frontend: lit-html, CSS, JS
-Backend: Node.js, Express
-Database: MongoDB
+- **Frontend:** lit-html, CSS, JS
+- **Backend:** Node.js, Express
+- **Database:** MongoDB
