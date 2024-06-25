@@ -39,15 +39,30 @@ const sportTemplate = (news, standings, sportName) => html`
         </aside>
     `;
 
+  //   const sportCard = (sport) => html`
+  //   <div class="news-section">
+  //   <article class="big-news">
+  //     <h2>${sport.title}</h2>
+  //     <p>${sport.matchDescrp}</p>
+  //     <img src="${sport.image}" alt="${sport.title}">
+  //   </article>
+  // </div>
+  //   `
+
     const sportCard = (sport) => html`
     <div class="news-section">
-    <article class="big-news">
-      <h2>${sport.title}</h2>
-      <p>${sport.matchDescrp}</p>
-      <img src="${sport.image}" alt="${sport.title}">
-    </article>
-  </div>
-    `
+      <article class="big-news">
+        <a href="/${sport._id}/details"><h2>${sport.title}</h2></a>
+        <div class="news-content">
+          <img src="${sport.image}" alt="${sport.title}">
+          <p>${sport.matchDescrp.slice(0, 150) + '...'}</p>
+          <div class="full-text-overlay">
+            <p>${sport.matchDescrp.slice(0, 300) + '...'}</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  `;
 
     const standingRow = (team, index) => html`
     <tr>
