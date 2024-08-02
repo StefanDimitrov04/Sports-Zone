@@ -11,7 +11,7 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "sportAppRestApi/index.js" },
+    { "src": "/api/(.*)", "dest": "sportAppRestApi/$1" },
     { "src": "/(.*)", "dest": "sportAppFrtEnd/$1" }
   ]
 }
