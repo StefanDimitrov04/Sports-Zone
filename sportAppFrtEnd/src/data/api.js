@@ -1,7 +1,7 @@
 import { deleteUserData, getUserData } from "../utils.js";
 
-const host = "http://localhost:3000/api";
-
+// const host = "http://localhost:3000/api";
+const host = 'https://sports-zone-6khdr3ud5-stefandims-projects.vercel.app/'
 async function request(method, url, data) {
 
     const options = {
