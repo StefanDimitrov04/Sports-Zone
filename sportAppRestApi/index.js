@@ -46,10 +46,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api', routes);
 
-mongoose.connect(process.env.MONGO_ATLAS_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect(process.env.MONGO_ATLAS_URL)
 .then(() => {
     console.log("db connected");
 })
