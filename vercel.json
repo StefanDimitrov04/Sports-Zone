@@ -1,15 +1,17 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "sportAppFrtEnd/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "sportAppFrtEnd"
-        }
-      }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "/sportAppFrtEnd/package.json" }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "sportAppFrtEnd/package.json",
+      "use": "@vercel/static-build"
+    },
+    {
+      "src": "sportAppRestApi/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "sportAppRestApi/index.js" },
+    { "src": "/(.*)", "dest": "sportAppFrtEnd/$1" }
+  ]
+}
