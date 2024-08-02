@@ -37,9 +37,10 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 
 const app = express();
-app.use(cors({
-    origin: 'https://sports-zone-seven.vercel.app/' // Update with your actual Vercel deployment URL
-}));
+app.use(cors());
+// app.use(cors({
+//     origin: 'https://sports-zone-seven.vercel.app/' // Update with your actual Vercel deployment URL
+// }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
