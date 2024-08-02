@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "sportAppFrtEnd/index.html",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "sportAppFrtEnd"
+        }
+      }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/sportAppFrtEnd/index.html" }
+    ]
+  }
