@@ -37,17 +37,17 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 
 const app = express();
-app.use(cors());
-// app.use(cors({
-//     origin: 'https://sports-zone-seven.vercel.app/' // Update with your actual Vercel deployment URL
-// }));
+// app.use(cors());
+app.use(cors({
+    origin: 'https://sports-zone-d6zj.vercel.app' // Update with your actual Vercel deployment URL
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api', routes);
 
-mongoose.connect(process.env.MONGO_ATLAS_URL)
+mongoose.connect(`mongodb+srv://sdimitrov2004:Ia0VUc6yrjb8UoI3@cluster0.vipjjmj.mongodb.net/`)
 .then(() => {
     console.log("db connected");
 })
