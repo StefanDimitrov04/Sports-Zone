@@ -1,5 +1,7 @@
-import  page from "../node_modules/page/page.mjs";
-import { html, render } from "../node_modules/lit-html/lit-html.js";
+// import  page from "../node_modules/page/page.mjs";
+//import { html, render } from "../node_modules/lit-html/lit-html.js";
+import { html, render } from "lit-html";
+import page from "page";
 import { getUserData } from "./utils.js";
 import { layoutTemplate } from "./views/layout.js";
 import { homePage } from "./views/home.js";
