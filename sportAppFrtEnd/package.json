@@ -2,9 +2,9 @@
   "name": "sportappfrtend",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build index.html"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +12,9 @@
   "dependencies": {
     "lit-html": "^3.1.4",
     "page": "^1.11.6"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
   }
 }
