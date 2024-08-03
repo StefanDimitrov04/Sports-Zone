@@ -39,7 +39,7 @@ const routes = require('./routes');
 const app = express();
 // app.use(cors());
 app.use(cors({
-    origin: 'https://sports-zone-d6zj.vercel.app' // Update with your actual Vercel deployment URL
+    origin: 'https://sports-zone-frontend.vercel.app' // Update with your actual Vercel deployment URL
 }));
 
 app.use(express.json());
